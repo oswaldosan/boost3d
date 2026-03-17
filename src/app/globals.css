@@ -8,13 +8,14 @@
   --color-bg-dark: #06043a;
   --color-bg-darker: #030225;
   --color-bg-light: #eaeaf0;
+  --color-surface: rgba(255, 255, 255, 0.72);
   --color-neutral: #f8f9ff;
   --color-gray: #6b7094;
   --color-glow-red: #ff6a63;
   --color-glow-blue: #4f7aff;
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ── Base Styles ── */
@@ -22,10 +23,14 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #e8eaf2;
 }
 
 body {
-  background: #eaeaf0;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(79, 122, 255, 0.08), transparent 40%),
+    radial-gradient(circle at 82% 12%, rgba(255, 106, 99, 0.1), transparent 38%),
+    linear-gradient(180deg, #eef0f8 0%, #e6e8f2 100%);
   color: var(--color-primary);
   font-family: var(--font-sans);
   overflow-x: hidden;
@@ -33,6 +38,18 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.2;
+  mix-blend-mode: multiply;
+  background-image: radial-gradient(rgba(13, 8, 105, 0.2) 0.6px, transparent 0.6px);
+  background-size: 3px 3px;
 }
 
 ::selection {
@@ -59,16 +76,17 @@ body {
 
 /* ── Card style for light background ── */
 .card {
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--color-surface);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(13, 8, 105, 0.08);
   border-radius: 1rem;
+  box-shadow: 0 18px 45px rgba(13, 8, 105, 0.08);
 }
 
 .card:hover {
   border-color: rgba(13, 8, 105, 0.15);
-  box-shadow: 0 8px 30px rgba(13, 8, 105, 0.08);
+  box-shadow: 0 20px 45px rgba(13, 8, 105, 0.12);
 }
 
 /* ── Glass for header (dark) ── */
@@ -77,6 +95,7 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(13, 8, 105, 0.08);
+  box-shadow: 0 10px 35px rgba(13, 8, 105, 0.08);
 }
 
 /* ── Gradient Text ── */
@@ -113,4 +132,12 @@ body {
     rgba(255, 67, 66, 0.08),
     transparent
   );
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
 }
