@@ -54,14 +54,14 @@ export default function Hero() {
           >
             <a
               href="#contacto"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(255,67,66,0.3)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_34px_rgba(255,67,66,0.38)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#eef0f8] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+              className="group inline-flex items-center justify-center gap-2 min-h-12 rounded-full bg-accent-strong px-7 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(214,41,40,0.3)] transition duration-300 hover:-translate-y-0.5 hover:bg-accent-ink hover:shadow-[0_16px_34px_rgba(214,41,40,0.38)] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
             >
               Contáctanos
               <ArrowIcon />
             </a>
             <a
               href="#servicios"
-              className="inline-flex items-center justify-center rounded-full border border-primary/15 bg-white/70 px-7 py-3.5 text-sm font-semibold text-primary backdrop-blur transition duration-300 hover:border-primary/25 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#eef0f8]"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-primary/40 bg-white/70 px-7 py-3.5 text-sm font-semibold text-primary backdrop-blur transition duration-300 hover:border-primary/60 hover:bg-white"
             >
               Ver servicios
             </a>
@@ -73,7 +73,7 @@ export default function Hero() {
           >
             {heroStats.map((stat) => (
               <div key={stat.label} className="flex flex-col-reverse justify-end gap-1 px-3 first:pl-0 last:pr-0 sm:px-5">
-                <dt className="text-[11px] leading-snug text-primary/60 sm:text-xs">
+                <dt className="text-xs leading-snug text-primary/75">
                   {stat.label}
                 </dt>
                 <dd className="font-display text-2xl font-bold tracking-tight text-primary sm:text-[1.75rem]">
@@ -125,7 +125,7 @@ function HeroVisual() {
         />
         <Image
           src="/brand/buho2.png"
-          alt="Búho de Boost Digital sobre una flecha de crecimiento"
+          alt="Búho de Boost Digital, agencia de marketing en Honduras, sobre una flecha de crecimiento"
           width={612}
           height={571}
           priority

@@ -17,7 +17,7 @@ export default function CTA() {
     const data = new FormData(form);
     const name = String(data.get('name') || '');
     const email = String(data.get('email') || '');
-    const interest = String(data.get('interest') || '');
+    const interest = data.getAll('interest').map(String).join(', ');
     const message = String(data.get('message') || '');
     const subject = encodeURIComponent(`Contacto web — ${interest || 'Consulta'}`);
     const body = encodeURIComponent(
@@ -28,7 +28,7 @@ export default function CTA() {
   };
 
   return (
-    <section ref={ref} id="contacto" className="relative py-32">
+    <section ref={ref} id="contacto" aria-labelledby="contacto-title" className="relative py-20 md:py-28 lg:py-32">
       <div className="relative mx-auto max-w-3xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -36,10 +36,10 @@ export default function CTA() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-accent">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-accent-ink">
             Contáctanos
           </p>
-          <h2 className="mb-6 text-4xl font-bold text-primary md:text-5xl lg:text-6xl">
+          <h2 id="contacto-title" className="mb-6 text-4xl font-bold text-primary md:text-5xl lg:text-6xl">
             ¿Listo para{' '}
             <span className="gradient-text-accent">trabajar con nosotros?</span>
           </h2>
@@ -51,7 +51,7 @@ export default function CTA() {
             O escríbenos a{' '}
             <a
               href={`mailto:${site.email}`}
-              className="font-medium text-accent transition-colors hover:text-glowRed"
+              className="font-semibold text-accent-ink underline decoration-accent-ink/30 underline-offset-4 transition-colors hover:decoration-accent-ink"
             >
               {site.email}
             </a>
@@ -63,12 +63,13 @@ export default function CTA() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15 }}
           onSubmit={onSubmit}
-          className="card space-y-5 p-8 text-left"
+          aria-label="Formulario de contacto"
+          className="card space-y-5 p-5 text-left sm:p-8"
         >
           {submitted ? (
-            <p className="py-8 text-center text-primary">
+            <p role="status" className="py-8 text-center text-primary">
               ¡Gracias! Si no se abrió tu correo, escríbenos a{' '}
-              <a href={`mailto:${site.email}`} className="text-accent underline">
+              <a href={`mailto:${site.email}`} className="font-semibold text-accent-ink underline underline-offset-4">
                 {site.email}
               </a>
               .
@@ -76,56 +77,58 @@ export default function CTA() {
           ) : (
             <>
               <div className="grid gap-4 sm:grid-cols-2">
-                <label className="block text-sm text-primary/80">
+                <label className="block text-sm font-medium text-primary">
                   Nombre
                   <input
                     required
                     name="name"
-                    className="mt-1.5 w-full rounded-xl border border-primary/10 bg-white/70 px-4 py-3 text-primary outline-none focus:border-accent/40"
+                    autoComplete="name"
+                    className="mt-1.5 w-full rounded-xl border border-primary/45 bg-white px-4 py-3 text-base text-primary placeholder:text-gray transition-colors hover:border-primary/60 focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-highlight"
                     placeholder="Tu nombre"
                   />
                 </label>
-                <label className="block text-sm text-primary/80">
+                <label className="block text-sm font-medium text-primary">
                   Correo Electrónico
                   <input
                     required
                     type="email"
                     name="email"
-                    className="mt-1.5 w-full rounded-xl border border-primary/10 bg-white/70 px-4 py-3 text-primary outline-none focus:border-accent/40"
+                    autoComplete="email"
+                    className="mt-1.5 w-full rounded-xl border border-primary/45 bg-white px-4 py-3 text-base text-primary placeholder:text-gray transition-colors hover:border-primary/60 focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-highlight"
                     placeholder="tu@email.com"
                   />
                 </label>
               </div>
 
               <fieldset>
-                <legend className="mb-2 text-sm text-primary/80">Interés</legend>
+                <legend className="mb-2 text-sm font-medium text-primary">Interés</legend>
                 <div className="flex flex-wrap gap-3">
                   {interests.map((item) => (
                     <label
                       key={item}
-                      className="flex cursor-pointer items-center gap-2 rounded-full border border-primary/10 bg-white/50 px-4 py-2 text-sm text-primary/80 has-[:checked]:border-accent/40 has-[:checked]:bg-accent/10"
+                      className="flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-primary/25 bg-white/70 px-4 py-2 text-sm font-medium text-primary transition-colors hover:border-primary/45 has-[:checked]:border-accent-strong has-[:checked]:bg-accent/10 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-highlight"
                     >
-                      <input type="checkbox" name="interest" value={item} className="accent-[var(--color-accent)]" />
+                      <input type="checkbox" name="interest" value={item} className="h-4 w-4 accent-[var(--color-accent-strong)] focus-visible:outline-none" />
                       {item}
                     </label>
                   ))}
                 </div>
               </fieldset>
 
-              <label className="block text-sm text-primary/80">
+              <label className="block text-sm font-medium text-primary">
                 Mensaje
                 <textarea
                   required
                   name="message"
                   rows={4}
-                  className="mt-1.5 w-full rounded-xl border border-primary/10 bg-white/70 px-4 py-3 text-primary outline-none focus:border-accent/40"
+                  className="mt-1.5 w-full rounded-xl border border-primary/45 bg-white px-4 py-3 text-base text-primary placeholder:text-gray transition-colors hover:border-primary/60 focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-highlight"
                   placeholder="Cuéntanos sobre tu proyecto"
                 />
               </label>
 
               <button
                 type="submit"
-                className="w-full rounded-full bg-accent px-10 py-4 text-base font-semibold text-white transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,67,66,0.35)] sm:w-auto"
+                className="min-h-12 w-full rounded-full bg-accent-strong px-10 py-4 text-base font-semibold text-white transition-colors duration-300 hover:bg-accent-ink sm:w-auto"
               >
                 Enviar
               </button>

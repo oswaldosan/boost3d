@@ -15,7 +15,7 @@ export default function Home() {
     <>
       <Header />
       <ScrollArrow />
-      <main>
+      <main id="contenido" tabIndex={-1} className="outline-none">
         <Hero />
         <div className="section-divider" />
         <Services />

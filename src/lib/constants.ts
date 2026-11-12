@@ -16,7 +16,7 @@ export const site = {
   name: 'Boost Digital',
   tagline: 'Marketing y Diseño Digital',
   subtitle: 'MARKETING - BTL - AUDIOVISUALES',
-  title: 'Somos Boost',
+  title: 'Tu agencia de marketing en Honduras',
   description:
     'Empresa de eventos, BTL, audiovisuales y Marketing digital. Creamos, producimos, administramos e implementamos sus requerimientos publicitarios',
   url: 'https://www.boostdigitalhn.com',
@@ -27,6 +27,17 @@ export const site = {
     { name: 'LinkedIn', href: 'https://linkedin.com/company/boost-digital-hn' },
   ],
 } as const;
+
+/** In-page sections, shared by the header, footer and scroll indicator. */
+export const navLinks = [
+  { label: 'Servicios', href: '#servicios' },
+  { label: 'Nosotros', href: '#nosotros' },
+  { label: 'Digital', href: '#digital' },
+  { label: 'Marcas', href: '#marcas' },
+  { label: 'Proceso', href: '#proceso' },
+] as const;
+
+export const contactLink = { label: 'Contáctanos', href: '#contacto' } as const;
 
 export const services = [
   {
@@ -63,10 +74,10 @@ export const stats = [
 ] as const;
 
 export const about = {
-  subtitle: 'QUIENES SOMOS ?',
-  title: 'SOMOS BOOST',
+  subtitle: '¿Quiénes somos?',
+  title: 'Tu agencia de marketing en Honduras',
   body:
-    'Con más de 7 años en el mercado, que se especializa en la elaboración de eventos corporativos y sociales, destacándonos por nuestro servicio y brindando una excelente calidad en cada uno de los eventos a los que asistimos.',
+    'Con más de 7 años en el mercado, nos especializamos en la elaboración de eventos corporativos y sociales, destacándonos por nuestro servicio y brindando una excelente calidad en cada uno de los eventos a los que asistimos.',
   mission:
     'Somos tu socio creativo y estratégico que te proporciona soluciones publicitarias innovadoras y efectivas que impulsan el crecimiento de tu marca, comprometidos con entender profundamente tus necesidades y objetivos',
   vision:

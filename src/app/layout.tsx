@@ -1,5 +1,8 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Manrope, Sora } from 'next/font/google';
+import MotionProvider from '@/components/providers/MotionProvider';
+import { site } from '@/lib/constants';
+import { SEO_DESCRIPTION, SEO_TITLE, SITE_URL } from '@/lib/seo';
 import './globals.css';
 
 const manrope = Manrope({
@@ -15,72 +18,102 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: 'Boost Digital – Marketing y Diseño Digital',
-  description:
-    'Empresa de eventos, BTL, audiovisuales y Marketing digital. Creamos, producimos, administramos e implementamos sus requerimientos publicitarios.',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SEO_TITLE,
+    template: `%s | ${site.name}`,
+  },
+  description: SEO_DESCRIPTION,
+  applicationName: site.name,
   keywords: [
     'Boost Digital',
-    'marketing Honduras',
-    'BTL Honduras',
-    'eventos Honduras',
-    'audiovisuales',
+    'agencia de marketing en Honduras',
     'marketing digital Honduras',
-    'activaciones',
-    'producción de eventos',
+    'BTL Honduras',
+    'activaciones de marca',
+    'producción de eventos Honduras',
+    'producción audiovisual Honduras',
+    'eventos corporativos Honduras',
+    'pantallas LED',
+    'manejo de redes sociales',
   ],
-  authors: [{ name: 'Boost Digital HN' }],
+  authors: [{ name: 'Boost Digital HN', url: SITE_URL }],
   creator: 'Boost Digital HN',
-  metadataBase: new URL('https://www.boostdigitalhn.com'),
-  icons: {
-    icon: '/brand/buho.png',
-    apple: '/brand/buho.png',
+  publisher: 'Boost Digital HN',
+  category: 'marketing',
+  alternates: {
+    canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'es_HN',
-    url: 'https://www.boostdigitalhn.com',
-    siteName: 'Boost Digital',
-    title: 'Boost Digital – Marketing y Diseño Digital',
-    description:
-      'Empresa de eventos, BTL, audiovisuales y Marketing digital en Honduras.',
-    images: [
-      {
-        url: '/brand/logoboost2.png',
-        width: 1200,
-        height: 630,
-        alt: 'Boost Digital',
-      },
-    ],
+    url: '/',
+    siteName: site.name,
+    title: SEO_TITLE,
+    description: SEO_DESCRIPTION,
+    // Image comes from src/app/opengraph-image.tsx (file convention).
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Boost Digital – Marketing y Diseño Digital',
-    description:
-      'Eventos, BTL, audiovisuales y Marketing digital en Honduras.',
-    images: ['/brand/logoboost2.png'],
+    title: SEO_TITLE,
+    description: SEO_DESCRIPTION,
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  formatDetection: {
+    telephone: false,
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: '#0d0869',
+  colorScheme: 'light',
+};
+
+/** Structured data limited to facts published on the site itself. */
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Boost Digital HN',
-  url: 'https://www.boostdigitalhn.com',
-  logo: 'https://www.boostdigitalhn.com/brand/logoboost2.png',
-  description:
-    'Empresa de eventos, BTL, audiovisuales y Marketing digital en Honduras.',
-  address: {
-    '@type': 'PostalAddress',
-    addressCountry: 'HN',
-  },
-  sameAs: [
-    'https://instagram.com/boostdigitalhn',
-    'https://facebook.com/boostdigitalhn',
-    'https://linkedin.com/company/boost-digital-hn',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
+      name: 'Boost Digital HN',
+      alternateName: site.name,
+      url: SITE_URL,
+      logo: `${SITE_URL}/brand/logoboost2.png`,
+      image: `${SITE_URL}/opengraph-image`,
+      description: site.description,
+      slogan: site.tagline,
+      email: site.email,
+      areaServed: { '@type': 'Country', name: 'Honduras' },
+      address: { '@type': 'PostalAddress', addressCountry: 'HN' },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer service',
+        email: site.email,
+        availableLanguage: ['es'],
+        areaServed: 'HN',
+      },
+      knowsAbout: ['BTL', 'Marketing digital', 'Producción de eventos', 'Audiovisuales'],
+      sameAs: site.socials.map((s) => s.href),
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: site.name,
+      inLanguage: 'es-HN',
+      publisher: { '@id': `${SITE_URL}/#organization` },
+    },
   ],
 };
 
@@ -90,14 +123,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${manrope.variable} ${sora.variable}`}>
-      <head>
+    <html lang="es-HN" className={`${manrope.variable} ${sora.variable}`}>
+      <body className="font-sans">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          // Escape "<" so the JSON can never close the script tag early.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
         />
-      </head>
-      <body className="font-sans">{children}</body>
+        <a
+          href="#contenido"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-primary focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
+        >
+          Saltar al contenido
+        </a>
+        <MotionProvider>{children}</MotionProvider>
+      </body>
     </html>
   );
 }
