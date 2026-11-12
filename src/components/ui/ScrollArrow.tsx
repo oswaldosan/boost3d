@@ -9,13 +9,14 @@ import {
 } from 'framer-motion';
 import { useState } from 'react';
 
+// Mirrors the real page order (decorative; the component is aria-hidden).
 const sectionLabels = [
-  'Hero',
+  'Inicio',
   'Servicios',
-  'Trabajo',
   'Nosotros',
+  'Digital',
+  'Marcas',
   'Proceso',
-  'Testimonios',
   'Contacto',
 ];
 
@@ -50,11 +51,11 @@ export default function ScrollArrow() {
   return (
     <motion.aside
       aria-hidden="true"
-      className="pointer-events-none fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 lg:block"
+      className="pointer-events-none fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 2xl:block"
       style={{ opacity }}
     >
       <div className="relative h-[360px] w-[96px] rounded-[26px] border border-primary/10 bg-white/65 shadow-[0_14px_35px_rgba(13,8,105,0.12)] backdrop-blur-md">
-        <p className="pt-4 text-center text-[10px] font-semibold uppercase tracking-[0.28em] text-primary/45">
+        <p className="pt-4 text-center text-[10px] font-semibold uppercase tracking-[0.28em] text-primary/75">
           Scroll
         </p>
 
@@ -80,8 +81,8 @@ export default function ScrollArrow() {
                   }`}
                 />
                 <span
-                  className={`absolute left-5 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-primary/10 bg-white/85 px-2 py-1 text-[10px] font-medium text-primary/65 shadow-sm transition-all duration-250 ${
-                    isCurrent ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-1'
+                  className={`absolute right-5 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-primary/10 bg-white px-2 py-1 text-[10px] font-medium text-primary shadow-sm transition-all duration-250 ${
+                    isCurrent ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-1'
                   }`}
                 >
                   {label}

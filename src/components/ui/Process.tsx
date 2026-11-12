@@ -9,18 +9,18 @@ export default function Process() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section ref={ref} id="proceso" className="relative py-32">
+    <section ref={ref} id="proceso" aria-labelledby="proceso-title" className="relative py-20 md:py-28 lg:py-32">
       <div className="relative mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-20 text-center"
+          className="mb-12 text-center md:mb-20"
         >
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-accent">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-accent-ink">
             Nuestro Proceso
           </p>
-          <h2 className="mb-6 text-4xl font-bold text-primary md:text-5xl lg:text-6xl">
+          <h2 id="proceso-title" className="mb-6 text-4xl font-bold text-primary md:text-5xl lg:text-6xl">
             De la idea al{' '}
             <span className="gradient-text-accent">impacto</span>
           </h2>
@@ -30,24 +30,24 @@ export default function Process() {
         </motion.div>
 
         <div className="relative">
-          <div className="absolute left-8 top-0 hidden h-full w-px bg-gradient-to-b from-primary/10 via-accent/10 to-transparent md:left-1/2 md:block" />
+          <div aria-hidden="true" className="absolute left-8 top-0 hidden h-full w-px bg-gradient-to-b from-primary/10 via-accent/10 to-transparent md:left-1/2 md:block" />
 
-          <div className="space-y-12 md:space-y-24">
+          <ol className="space-y-8 md:space-y-24">
             {processSteps.map((step, i) => {
               const isEven = i % 2 === 0;
               return (
-                <motion.div
+                <motion.li
                   key={step.step}
-                  initial={{ opacity: 0, x: isEven ? -40 : 40 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: i * 0.15 }}
-                  className={`relative flex flex-col items-center gap-8 md:flex-row ${
+                  className={`relative flex flex-col-reverse items-center gap-4 md:gap-8 md:flex-row ${
                     isEven ? '' : 'md:flex-row-reverse'
                   }`}
                 >
-                  <div className={`flex-1 ${isEven ? 'md:text-right' : 'md:text-left'}`}>
-                    <div className="card inline-block p-8 transition-all duration-500">
-                      <span className="mb-2 block text-sm font-bold text-accent">
+                  <div className={`w-full flex-1 ${isEven ? 'md:text-right' : 'md:text-left'}`}>
+                    <div className="card w-full p-6 sm:p-8 md:inline-block md:w-auto md:max-w-md">
+                      <span className="mb-2 block text-sm font-bold text-accent-ink">
                         Paso {step.step}
                       </span>
                       <h3 className="mb-3 text-2xl font-bold text-primary">
@@ -57,17 +57,17 @@ export default function Process() {
                     </div>
                   </div>
 
-                  <div className="relative z-10 flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full border border-primary/10 bg-bg-light">
+                  <div aria-hidden="true" className="relative z-10 flex h-14 w-14 md:h-16 md:w-16 flex-shrink-0 items-center justify-center rounded-full border border-primary/10 bg-bg-light">
                     <span className="text-lg font-bold text-primary">
                       {step.step}
                     </span>
                   </div>
 
-                  <div className="hidden flex-1 md:block" />
-                </motion.div>
+                  <div aria-hidden="true" className="hidden flex-1 md:block" />
+                </motion.li>
               );
             })}
-          </div>
+          </ol>
         </div>
       </div>
     </section>

@@ -9,18 +9,18 @@ export default function About() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section ref={ref} id="nosotros" className="relative py-32">
+    <section ref={ref} id="nosotros" aria-labelledby="nosotros-title" className="relative py-20 md:py-28 lg:py-32">
       <div className="relative mx-auto max-w-7xl px-6">
-        <div className="grid items-center gap-16 lg:grid-cols-2">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-accent">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-accent-ink">
               {about.subtitle}
             </p>
-            <h2 className="mb-6 text-4xl font-bold text-primary md:text-5xl">
+            <h2 id="nosotros-title" className="mb-6 text-4xl font-bold text-primary md:text-5xl">
               {about.title.split(' ').slice(0, -1).join(' ')}{' '}
               <span className="gradient-text-accent">
                 {about.title.split(' ').slice(-1)}
@@ -41,13 +41,17 @@ export default function About() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative overflow-hidden rounded-2xl border border-primary/10 bg-primary/5 shadow-[0_20px_50px_rgba(13,8,105,0.12)]"
           >
             <video
-              className="aspect-square w-full object-cover"
+              aria-label="Animación del logotipo de Boost Digital"
+              width={640}
+              height={640}
+              preload="metadata"
+              className="block aspect-square w-full object-cover"
               src={about.video}
               autoPlay
               muted

@@ -4,13 +4,22 @@
 @theme {
   --color-primary: #0d0869;
   --color-accent: #ff4342;
+  /* Accessible accent shades (WCAG AA). Brand #ff4342 only reaches 3.42:1 with
+     white text and ~2.8–3.0:1 on the light page background, so:
+     - accent-strong: filled CTA backgrounds (white text 4.99:1)
+     - accent-ink: accent-colored text on light surfaces (>= 4.83:1) */
+  --color-accent-strong: #d62928;
+  --color-accent-ink: #c41f1e;
   --color-highlight: #3b6cff;
   --color-bg-dark: #06043a;
   --color-bg-darker: #030225;
   --color-bg-light: #eaeaf0;
   --color-surface: rgba(255, 255, 255, 0.72);
   --color-neutral: #f8f9ff;
-  --color-gray: #6b7094;
+  /* Body copy on light surfaces: 5.38:1 on the darkest page tone (was #6b7094, 3.93:1) */
+  --color-gray: #565b7e;
+  /* Muted copy on the dark footer (#030225): 9.05:1 */
+  --color-gray-on-dark: #a6accd;
   --color-glow-red: #ff6a63;
   --color-glow-blue: #4f7aff;
 
@@ -21,6 +30,7 @@
 /* ── Base Styles ── */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem; /* keep anchored headings clear of the fixed header */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #e8eaf2;
@@ -53,8 +63,21 @@ body::before {
 }
 
 ::selection {
-  background: rgba(255, 67, 66, 0.3);
+  background: var(--color-accent-strong);
   color: #fff;
+}
+
+/* ── Focus ── one consistent, high-contrast keyboard indicator site-wide */
+:focus-visible {
+  outline: 2px solid var(--color-highlight);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -100,7 +123,8 @@ body::before {
 
 /* ── Gradient Text ── */
 .gradient-text-accent {
-  background: linear-gradient(135deg, var(--color-accent), var(--color-glow-red));
+  /* Used on large headings only (3:1 needed): stops measure 4.09:1 and 3.53:1 on the darkest page tone */
+  background: linear-gradient(135deg, var(--color-accent-strong), #e63231);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
