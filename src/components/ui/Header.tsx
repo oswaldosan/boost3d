@@ -6,10 +6,10 @@ import Image from 'next/image';
 
 const navLinks = [
   { label: 'Servicios', href: '#servicios' },
-  { label: 'Trabajo', href: '#trabajo' },
-  { label: 'Proceso', href: '#proceso' },
   { label: 'Nosotros', href: '#nosotros' },
-  { label: 'Testimonios', href: '#testimonios' },
+  { label: 'Digital', href: '#digital' },
+  { label: 'Marcas', href: '#marcas' },
+  { label: 'Proceso', href: '#proceso' },
 ];
 
 export default function Header() {
@@ -28,13 +28,10 @@ export default function Header() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'glass-strong py-4'
-          : 'bg-transparent py-6'
+        scrolled ? 'glass-strong py-4' : 'bg-transparent py-6'
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6">
-        {/* Logo */}
         <a href="#" className="relative z-10 flex items-center gap-3">
           <Image
             src="/brand/logoboost2.png"
@@ -46,7 +43,6 @@ export default function Header() {
           />
         </a>
 
-        {/* Desktop Navigation */}
         <div className="hidden items-center gap-10 md:flex">
           {navLinks.map((link) => (
             <a
@@ -65,30 +61,16 @@ export default function Header() {
           </a>
         </div>
 
-        {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="relative z-10 flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
           aria-label={mobileOpen ? 'Cerrar menú' : 'Abrir menú'}
         >
-          <span
-            className={`h-0.5 w-6 transition-all duration-300 bg-primary ${
-              mobileOpen ? 'translate-y-2 rotate-45' : ''
-            }`}
-          />
-          <span
-            className={`h-0.5 w-6 transition-all duration-300 bg-primary ${
-              mobileOpen ? 'opacity-0' : ''
-            }`}
-          />
-          <span
-            className={`h-0.5 w-6 transition-all duration-300 bg-primary ${
-              mobileOpen ? '-translate-y-2 -rotate-45' : ''
-            }`}
-          />
+          <span className={`h-0.5 w-6 transition-all duration-300 bg-primary ${mobileOpen ? 'translate-y-2 rotate-45' : ''}`} />
+          <span className={`h-0.5 w-6 transition-all duration-300 bg-primary ${mobileOpen ? 'opacity-0' : ''}`} />
+          <span className={`h-0.5 w-6 transition-all duration-300 bg-primary ${mobileOpen ? '-translate-y-2 -rotate-45' : ''}`} />
         </button>
 
-        {/* Mobile Menu */}
         <AnimatePresence>
           {mobileOpen && (
             <motion.div

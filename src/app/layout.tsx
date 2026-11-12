@@ -15,86 +15,73 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: 'Boost Digital HN | Agencia de Marketing & Eventos BTL en Honduras',
+  title: 'Boost Digital – Marketing y Diseño Digital',
   description:
-    'Agencia líder en marketing estratégico, producción de eventos BTL, activaciones de marca y marketing experiencial en Honduras. Transformamos marcas en experiencias memorables.',
+    'Empresa de eventos, BTL, audiovisuales y Marketing digital. Creamos, producimos, administramos e implementamos sus requerimientos publicitarios.',
   keywords: [
-    'marketing Honduras',
-    'eventos BTL Honduras',
-    'agencia de marketing',
-    'activaciones de marca',
-    'marketing experiencial',
     'Boost Digital',
+    'marketing Honduras',
+    'BTL Honduras',
+    'eventos Honduras',
+    'audiovisuales',
     'marketing digital Honduras',
+    'activaciones',
     'producción de eventos',
-    'BTL Tegucigalpa',
   ],
   authors: [{ name: 'Boost Digital HN' }],
   creator: 'Boost Digital HN',
-  metadataBase: new URL('https://boostdigitalhn.com'),
+  metadataBase: new URL('https://www.boostdigitalhn.com'),
+  icons: {
+    icon: '/brand/buho.png',
+    apple: '/brand/buho.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'es_HN',
-    url: 'https://boostdigitalhn.com',
-    siteName: 'Boost Digital HN',
-    title: 'Boost Digital HN | Marketing & Eventos BTL de Clase Mundial',
+    url: 'https://www.boostdigitalhn.com',
+    siteName: 'Boost Digital',
+    title: 'Boost Digital – Marketing y Diseño Digital',
     description:
-      'Transformamos marcas en experiencias memorables. Estrategia digital, producción BTL y activaciones de clase mundial desde Honduras.',
+      'Empresa de eventos, BTL, audiovisuales y Marketing digital en Honduras.',
     images: [
       {
         url: '/brand/logoboost2.png',
         width: 1200,
         height: 630,
-        alt: 'Boost Digital HN',
+        alt: 'Boost Digital',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Boost Digital HN | Marketing & Eventos BTL',
+    title: 'Boost Digital – Marketing y Diseño Digital',
     description:
-      'Agencia líder en marketing estratégico y producción de eventos BTL en Honduras.',
+      'Eventos, BTL, audiovisuales y Marketing digital en Honduras.',
     images: ['/brand/logoboost2.png'],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
   },
 };
 
-// Schema.org structured data
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Boost Digital HN',
-  url: 'https://boostdigitalhn.com',
-  logo: 'https://boostdigitalhn.com/brand/logoboost2.png',
+  url: 'https://www.boostdigitalhn.com',
+  logo: 'https://www.boostdigitalhn.com/brand/logoboost2.png',
   description:
-    'Agencia líder en marketing estratégico, producción de eventos BTL y activaciones de marca en Honduras.',
+    'Empresa de eventos, BTL, audiovisuales y Marketing digital en Honduras.',
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Tegucigalpa',
     addressCountry: 'HN',
   },
   sameAs: [
     'https://instagram.com/boostdigitalhn',
     'https://facebook.com/boostdigitalhn',
-    'https://linkedin.com/company/boostdigitalhn',
-    'https://tiktok.com/@boostdigitalhn',
+    'https://linkedin.com/company/boost-digital-hn',
   ],
-  contactPoint: {
-    '@type': 'ContactPoint',
-    email: 'hola@boostdigitalhn.com',
-    contactType: 'customer service',
-    availableLanguage: ['Spanish'],
-  },
 };
 
 export default function RootLayout({

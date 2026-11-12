@@ -1,37 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Boost Digital — Landing
 
-## Getting Started
+Landing page para **Boost Digital HN** (Next.js + React Three Fiber). El hero combina copy animado con Framer Motion y una escena 3D del logo en GLB.
 
-First, run the development server:
+## Requisitos
+
+- Node.js 20+ (recomendado)
+- npm
+
+## Desarrollo
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Comando     | Descripción              |
+|------------|---------------------------|
+| `npm run dev`   | Servidor de desarrollo    |
+| `npm run build` | Build de producción       |
+| `npm run start` | Servidor tras el build    |
+| `npm run lint`  | ESLint                    |
 
-## Learn More
+## Estructura relevante
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app/` — App Router, layout, metadata y SEO (JSON-LD).
+- `src/components/ui/` — Secciones de la landing.
+- `src/components/3d/HeroScene.tsx` — Canvas R3F: modelo `public/3d/Logo3.glb`, partículas, luces, post-proceso.
+- `src/lib/constants.ts` — Textos y datos de marca.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Convención del modelo 3D
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+El código asigna materiales y animaciones por **nombre de malla** en el GLB (p. ej. `Shape8`, `Shape11`, `Shape12`, `Shape62`). Si re-exportas el archivo desde Blender u otra herramienta, conserva esos nombres o actualiza el `traverse` en `HeroScene.tsx`.
 
-## Deploy on Vercel
+**Shape11** suele incluir el texto secundario del logo y, en muchos exports, el **pico triangular** debajo del wordmark en la misma geometría. En escena usa el mismo material naranja que **Shape12** (flecha). Para quitar solo el texto, separa mallas en tu herramienta 3D y exporta de nuevo.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Accesibilidad y rendimiento
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# boost3d
+- `prefers-reduced-motion: reduce`: menos parallax en el logo/cámara, sin estrellas fugaces ni bloom.
+- El scroll del hero actualiza un **ref** (no `setState` por frame) para no re-renderizar React al hacer scroll.
+- Un solo listener `pointermove` en el hero alimenta logo, cámara y partículas.
+
+## Despliegue
+
+Proyecto listo para [Vercel](https://vercel.com) u otro hosting compatible con Next.js. Ajusta `metadataBase` y URLs en `src/app/layout.tsx` si cambia el dominio.

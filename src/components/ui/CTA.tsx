@@ -1,60 +1,137 @@
 'use client';
 
-import { useRef } from 'react';
+import { site } from '@/lib/constants';
+import { useRef, useState, FormEvent } from 'react';
 import { motion, useInView } from 'framer-motion';
+
+const interests = ['BTL', 'Audiovisuales', 'Marketing Digital', 'Desarrollo web'] as const;
 
 export default function CTA() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [submitted, setSubmitted] = useState(false);
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const name = String(data.get('name') || '');
+    const email = String(data.get('email') || '');
+    const interest = String(data.get('interest') || '');
+    const message = String(data.get('message') || '');
+    const subject = encodeURIComponent(`Contacto web — ${interest || 'Consulta'}`);
+    const body = encodeURIComponent(
+      `Nombre: ${name}\nEmail: ${email}\nInterés: ${interest}\n\n${message}`,
+    );
+    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
+    setSubmitted(true);
+  };
 
   return (
     <section ref={ref} id="contacto" className="relative py-32">
-      <div className="relative mx-auto max-w-4xl px-6 text-center">
+      <div className="relative mx-auto max-w-3xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="relative"
+          className="text-center"
         >
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-accent">
-            Empecemos
+            Contáctanos
           </p>
           <h2 className="mb-6 text-4xl font-bold text-primary md:text-5xl lg:text-6xl">
             ¿Listo para{' '}
-            <span className="gradient-text-accent">transformar tu marca?</span>
+            <span className="gradient-text-accent">trabajar con nosotros?</span>
           </h2>
-          <p className="mx-auto mb-12 max-w-xl text-lg text-gray">
-            Hablemos sobre cómo podemos llevar tu marca al siguiente nivel.
-            El primer paso comienza con una conversación.
+          <p className="mx-auto mb-4 max-w-xl text-lg text-gray">
+            Cuéntanos sobre tu proyecto. Creamos, producimos e implementamos
+            soluciones BTL, eventos, audiovisuales y marketing digital.
           </p>
-
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <p className="mx-auto mb-12 text-sm text-gray">
+            O escríbenos a{' '}
             <a
-              href="mailto:hola@boostdigitalhn.com"
-              className="group relative overflow-hidden rounded-full bg-accent px-12 py-5 text-lg font-semibold text-white transition-all duration-300 hover:shadow-[0_0_50px_rgba(255,67,66,0.3)] hover:scale-105"
+              href={`mailto:${site.email}`}
+              className="font-medium text-accent transition-colors hover:text-glowRed"
             >
-              <span className="relative z-10">Agendar Consulta</span>
-              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+              {site.email}
             </a>
-            <a
-              href="https://wa.me/50400000000"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full border border-primary/20 px-12 py-5 text-lg font-semibold text-primary transition-all duration-300 hover:border-primary/40 hover:bg-primary/5"
-            >
-              WhatsApp
-            </a>
-          </div>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="mt-8 text-sm text-gray/60"
-          >
-            Respuesta en menos de 24 horas. Sin compromiso.
-          </motion.p>
+          </p>
         </motion.div>
+
+        <motion.form
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.15 }}
+          onSubmit={onSubmit}
+          className="card space-y-5 p-8 text-left"
+        >
+          {submitted ? (
+            <p className="py-8 text-center text-primary">
+              ¡Gracias! Si no se abrió tu correo, escríbenos a{' '}
+              <a href={`mailto:${site.email}`} className="text-accent underline">
+                {site.email}
+              </a>
+              .
+            </p>
+          ) : (
+            <>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <label className="block text-sm text-primary/80">
+                  Nombre
+                  <input
+                    required
+                    name="name"
+                    className="mt-1.5 w-full rounded-xl border border-primary/10 bg-white/70 px-4 py-3 text-primary outline-none focus:border-accent/40"
+                    placeholder="Tu nombre"
+                  />
+                </label>
+                <label className="block text-sm text-primary/80">
+                  Correo Electrónico
+                  <input
+                    required
+                    type="email"
+                    name="email"
+                    className="mt-1.5 w-full rounded-xl border border-primary/10 bg-white/70 px-4 py-3 text-primary outline-none focus:border-accent/40"
+                    placeholder="tu@email.com"
+                  />
+                </label>
+              </div>
+
+              <fieldset>
+                <legend className="mb-2 text-sm text-primary/80">Interés</legend>
+                <div className="flex flex-wrap gap-3">
+                  {interests.map((item) => (
+                    <label
+                      key={item}
+                      className="flex cursor-pointer items-center gap-2 rounded-full border border-primary/10 bg-white/50 px-4 py-2 text-sm text-primary/80 has-[:checked]:border-accent/40 has-[:checked]:bg-accent/10"
+                    >
+                      <input type="checkbox" name="interest" value={item} className="accent-[var(--color-accent)]" />
+                      {item}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <label className="block text-sm text-primary/80">
+                Mensaje
+                <textarea
+                  required
+                  name="message"
+                  rows={4}
+                  className="mt-1.5 w-full rounded-xl border border-primary/10 bg-white/70 px-4 py-3 text-primary outline-none focus:border-accent/40"
+                  placeholder="Cuéntanos sobre tu proyecto"
+                />
+              </label>
+
+              <button
+                type="submit"
+                className="w-full rounded-full bg-accent px-10 py-4 text-base font-semibold text-white transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,67,66,0.35)] sm:w-auto"
+              >
+                Enviar
+              </button>
+            </>
+          )}
+        </motion.form>
       </div>
     </section>
   );
