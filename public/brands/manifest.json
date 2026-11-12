@@ -1,0 +1,322 @@
+[
+  {
+    "name": "Pepsi",
+    "file": "/brands/pepsi.png",
+    "src": "Pepsi-logo-300x169.png"
+  },
+  {
+    "name": "Kia",
+    "file": "/brands/kia.png",
+    "src": "Kia-logo-300x169.png"
+  },
+  {
+    "name": "Genesis",
+    "file": "/brands/genesis.png",
+    "src": "Genesis-300x76.png"
+  },
+  {
+    "name": "Gatorade",
+    "file": "/brands/gatorade.png",
+    "src": "Gatorade_logo.svg_-245x300.png"
+  },
+  {
+    "name": "Fruta Fresca",
+    "file": "/brands/fruta-fresca.png",
+    "src": "Fruta-Fresca.png"
+  },
+  {
+    "name": "Price Home",
+    "file": "/brands/price-home.png",
+    "src": "LOGO-Price-Home-01-300x162.png"
+  },
+  {
+    "name": "Adrenaline",
+    "file": "/brands/adrenaline.png",
+    "src": "Logo_adreanline-300x300.png"
+  },
+  {
+    "name": "Multiplaza",
+    "file": "/brands/multiplaza.png",
+    "src": "Multiplaza-300x166.png"
+  },
+  {
+    "name": "Pasta Ina",
+    "file": "/brands/pasta-ina.png",
+    "src": "Pasta-Ina-300x259.png"
+  },
+  {
+    "name": "Petit",
+    "file": "/brands/petit.png",
+    "src": "Petit-300x300.png"
+  },
+  {
+    "name": "Dilo",
+    "file": "/brands/dilo.png",
+    "src": "LogoDilo-300x98.png"
+  },
+  {
+    "name": "Mendels",
+    "file": "/brands/mendels.png",
+    "src": "LOGO-MENDELS-300x69.png"
+  },
+  {
+    "name": "Plaza Miraflores",
+    "file": "/brands/plaza-miraflores.png",
+    "src": "Plaza-Miraflores-300x128.png"
+  },
+  {
+    "name": "Pollolandia",
+    "file": "/brands/pollolandia.png",
+    "src": "Pollolandia-300x300.png"
+  },
+  {
+    "name": "Motomundo",
+    "file": "/brands/motomundo.png",
+    "src": "logo-motomundo-300x125.png"
+  },
+  {
+    "name": "Punto Farma",
+    "file": "/brands/punto-farma.jpg",
+    "src": "logo-punto-farma-alta-resolucion-300x120.jpg"
+  },
+  {
+    "name": "Lipton",
+    "file": "/brands/lipton.png",
+    "src": "Lipton-logo-300x169.png"
+  },
+  {
+    "name": "California",
+    "file": "/brands/california.png",
+    "src": "Logo-California-01-300x300.png"
+  },
+  {
+    "name": "El Porteno",
+    "file": "/brands/el-porteno.png",
+    "src": "El-Porteno-300x169.png"
+  },
+  {
+    "name": "Espreso Americano",
+    "file": "/brands/espreso-americano.png",
+    "src": "Espreso-Americano-300x300.png"
+  },
+  {
+    "name": "Ficohsa",
+    "file": "/brands/ficohsa.png",
+    "src": "Ficohsa-300x134.png"
+  },
+  {
+    "name": "PolloRey",
+    "file": "/brands/pollorey.png",
+    "src": "Logo-PolloRey-300x300.png"
+  },
+  {
+    "name": "Hugo",
+    "file": "/brands/hugo.png",
+    "src": "logo-hugo-300x236.png"
+  },
+  {
+    "name": "Loto",
+    "file": "/brands/loto.png",
+    "src": "Loto_borde-300x300.png"
+  },
+  {
+    "name": "LOWA",
+    "file": "/brands/lowa.png",
+    "src": "LOWA-S.A-300x300.png"
+  },
+  {
+    "name": "Ron Flor de Cana",
+    "file": "/brands/ron-flor-de-cana.png",
+    "src": "Ron-Flor-de-Cana-300x153.png"
+  },
+  {
+    "name": "Riunite",
+    "file": "/brands/riunite.png",
+    "src": "Riunite-Reg-Master-Logo-300x100.png"
+  },
+  {
+    "name": "DeTodo",
+    "file": "/brands/detodo.png",
+    "src": "DeTodo-300x116.png"
+  },
+  {
+    "name": "Franks",
+    "file": "/brands/franks.png",
+    "src": "franks.png"
+  },
+  {
+    "name": "Totto",
+    "file": "/brands/totto.png",
+    "src": "Totto-Logo-204x300.png"
+  },
+  {
+    "name": "Quetzalteca",
+    "file": "/brands/quetzalteca.png",
+    "src": "quetzalteca-logo-300x275.png"
+  },
+  {
+    "name": "Metromall",
+    "file": "/brands/metromall.png",
+    "src": "Metromall-300x123.png"
+  },
+  {
+    "name": "Gold Medal",
+    "file": "/brands/gold-medal.png",
+    "src": "logo-gold-medal-300x300.png"
+  },
+  {
+    "name": "Europea",
+    "file": "/brands/europea.png",
+    "src": "LOGO-EUROPEA-300x233.png"
+  },
+  {
+    "name": "Hollandia",
+    "file": "/brands/hollandia.png",
+    "src": "Hollandia-300x147.png"
+  },
+  {
+    "name": "Ron Abuelo",
+    "file": "/brands/ron-abuelo.png",
+    "src": "Ron-Abuelo-Logo-Vector.svg--300x135.png"
+  },
+  {
+    "name": "Toledo",
+    "file": "/brands/toledo.png",
+    "src": "toledo-logo.png"
+  },
+  {
+    "name": "Salutaris",
+    "file": "/brands/salutaris.png",
+    "src": "Salutaris-300x300.png"
+  },
+  {
+    "name": "PAR2",
+    "file": "/brands/par2.png",
+    "src": "PAR2-min-300x145.png"
+  },
+  {
+    "name": "Honduras Compania Chocolate",
+    "file": "/brands/honduras-compania-chocolate.png",
+    "src": "Honduras-Compania-Chocolate-300x300.png"
+  },
+  {
+    "name": "Del Comal",
+    "file": "/brands/del-comal.png",
+    "src": "Del-Comal-300x150.png"
+  },
+  {
+    "name": "Arizona",
+    "file": "/brands/arizona.png",
+    "src": "Arizona-300x158.png"
+  },
+  {
+    "name": "Yamaha",
+    "file": "/brands/yamaha.png",
+    "src": "Yamaha-Logo-300x169.png"
+  },
+  {
+    "name": "Wendys",
+    "file": "/brands/wendys.png",
+    "src": "Wendys__logo-300x253.png"
+  },
+  {
+    "name": "TVS",
+    "file": "/brands/tvs.png",
+    "src": "TVS-Logo-300x188.png"
+  },
+  {
+    "name": "Tecate",
+    "file": "/brands/tecate.png",
+    "src": "Tecate-Logo-2015-300x189.png"
+  },
+  {
+    "name": "Choco Wow",
+    "file": "/brands/choco-wow.png",
+    "src": "Choco-Wow-300x300.png"
+  },
+  {
+    "name": "City Mall",
+    "file": "/brands/city-mall.png",
+    "src": "city-mall-logo-208x300.png"
+  },
+  {
+    "name": "KMF",
+    "file": "/brands/kmf.png",
+    "src": "KMF-300x119.png"
+  },
+  {
+    "name": "La Colonia",
+    "file": "/brands/la-colonia.png",
+    "src": "La-COLONIA-300x189.png"
+  },
+  {
+    "name": "Bayer",
+    "file": "/brands/bayer.png",
+    "src": "Logo_Bayer-300x300.png"
+  },
+  {
+    "name": "Lady Lee",
+    "file": "/brands/lady-lee.png",
+    "src": "logo_lady_lee-300x141.png"
+  },
+  {
+    "name": "Paulaner",
+    "file": "/brands/paulaner.png",
+    "src": "paulaner-munchen-logo-300x300.png"
+  },
+  {
+    "name": "Remington",
+    "file": "/brands/remington.png",
+    "src": "Remington-300x100.png"
+  },
+  {
+    "name": "Tatascan",
+    "file": "/brands/tatascan.png",
+    "src": "Tatascan-300x167.png"
+  },
+  {
+    "name": "Victoria",
+    "file": "/brands/victoria.png",
+    "src": "cerveza_victoria_clasica-300x240.png"
+  },
+  {
+    "name": "Bumblebee",
+    "file": "/brands/bumblebee.png",
+    "src": "Bumblebee-logo-300x76.png"
+  },
+  {
+    "name": "Argos",
+    "file": "/brands/argos.png",
+    "src": "argos-logo.png"
+  },
+  {
+    "name": "Amp Energy",
+    "file": "/brands/amp-energy.png",
+    "src": "amp-energy-logo.png"
+  },
+  {
+    "name": "Adoc",
+    "file": "/brands/adoc.png",
+    "src": "Adoc-Logo-Vector.svg--300x46.png"
+  },
+  {
+    "name": "Aca Joe",
+    "file": "/brands/aca-joe.jpg",
+    "src": "Aca-Joe-300x115.jpg"
+  },
+  {
+    "name": "Absolut Vodka",
+    "file": "/brands/absolut-vodka.png",
+    "src": "Absolut-Vodka-300x139.png"
+  },
+  {
+    "name": "Vino y Licores",
+    "file": "/brands/vino-y-licores.png",
+    "src": "Vino-y-Licores-300x163.png"
+  },
+  {
+    "name": "Chivas",
+    "file": "/brands/chivas.png",
+    "src": "Chivas-Logo-300x169.png"
+  }
+]

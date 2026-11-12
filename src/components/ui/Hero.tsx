@@ -1,132 +1,188 @@
-'use client';
+import Image from 'next/image';
+import type { CSSProperties } from 'react';
+import { site, stats } from '@/lib/constants';
 
-import dynamic from 'next/dynamic';
-import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
-import { useRef, useState } from 'react';
+// Stats shown as social proof under the CTAs (brands, activations, years).
+const heroStats = [stats[3], stats[1], stats[0]];
 
-const HeroScene = dynamic(() => import('@/components/3d/HeroScene'), {
-  ssr: false,
-  loading: () => (
-    <div className="absolute inset-0 flex items-center justify-center" style={{ background: '#eaeaf0' }}>
-      <div className="h-16 w-16 animate-pulse rounded-full bg-primary/20" />
-    </div>
-  ),
-});
+const subtitleParts = site.subtitle.split('-').map((part) => part.trim());
+
+/** Staggered entrance delay consumed by the `.hero-reveal` animation. */
+const delay = (ms: number) => ({ '--hero-delay': `${ms}ms` }) as CSSProperties;
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end start'],
-  });
-
-  useMotionValueEvent(scrollYProgress, 'change', (v) => setScrollProgress(v));
-
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, 115]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
-
   return (
     <section
-      ref={containerRef}
       id="hero"
-      className="relative flex min-h-[100svh] flex-col items-center justify-end overflow-hidden pb-8 pt-24 sm:min-h-[100svh] sm:pb-16 sm:pt-28"
-      style={{ background: '#eaeaf0' }}
+      aria-labelledby="hero-title"
+      className="relative isolate overflow-hidden"
     >
-      {/* Subtle radial gradient behind the logo — spotlight effect */}
-      <div
-        className="pointer-events-none absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2"
-        style={{
-          width: '800px',
-          height: '800px',
-          background: 'radial-gradient(circle, rgba(59,108,255,0.06) 0%, rgba(255,67,66,0.03) 40%, transparent 70%)',
-          borderRadius: '50%',
-        }}
-      />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_500px_at_50%_95%,rgba(255,67,66,0.06),transparent_70%)]" />
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-[22%] top-[-35%] h-[170%] w-[42%] rotate-[15deg] bg-gradient-to-b from-white/38 via-white/0 to-transparent blur-3xl"
-        animate={{ x: ['-8%', '10%', '-8%'], opacity: [0.22, 0.38, 0.22] }}
-        transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
-      />
+      <HeroBackdrop />
 
-      {/* 3D Scene */}
-      <div className="absolute inset-0">
-        <HeroScene scrollProgress={scrollProgress} />
+      <div className="mx-auto grid min-h-[100svh] w-full max-w-[1120px] items-center gap-12 px-5 pb-16 pt-32 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10 lg:px-10 lg:pb-20 lg:pt-28">
+        <div className="max-w-xl">
+          <p
+            className="hero-reveal mb-6 inline-flex items-center gap-2.5 rounded-full border border-primary/10 bg-white/70 py-1.5 pl-2 pr-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary/70 shadow-[0_6px_18px_rgba(13,8,105,0.06)] backdrop-blur sm:text-xs"
+            style={delay(0)}
+          >
+            <span className="relative flex h-2 w-2" aria-hidden="true">
+              <span className="hero-ping absolute inset-0 rounded-full bg-accent/60" />
+              <span className="relative h-2 w-2 rounded-full bg-accent" />
+            </span>
+            {subtitleParts.join(' · ')}
+          </p>
+
+          <h1
+            id="hero-title"
+            className="hero-reveal font-display text-[3.25rem] font-bold leading-[0.98] tracking-[-0.04em] text-primary sm:text-[4.25rem] lg:text-[5.25rem]"
+            style={delay(80)}
+          >
+            Somos <span className="gradient-text-accent">Boost</span>
+          </h1>
+
+          <p
+            className="hero-reveal mt-6 max-w-[30rem] text-base leading-relaxed text-primary/70 sm:text-lg"
+            style={delay(160)}
+          >
+            Eventos, BTL, audiovisuales y marketing digital. Creamos y ejecutamos
+            campañas que hacen crecer marcas en Honduras.
+          </p>
+
+          <div
+            className="hero-reveal mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
+            style={delay(240)}
+          >
+            <a
+              href="#contacto"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(255,67,66,0.3)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_34px_rgba(255,67,66,0.38)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#eef0f8] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+            >
+              Contáctanos
+              <ArrowIcon />
+            </a>
+            <a
+              href="#servicios"
+              className="inline-flex items-center justify-center rounded-full border border-primary/15 bg-white/70 px-7 py-3.5 text-sm font-semibold text-primary backdrop-blur transition duration-300 hover:border-primary/25 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#eef0f8]"
+            >
+              Ver servicios
+            </a>
+          </div>
+
+          <dl
+            className="hero-reveal mt-12 grid max-w-md grid-cols-3 divide-x divide-primary/10 border-t border-primary/10 pt-6"
+            style={delay(320)}
+          >
+            {heroStats.map((stat) => (
+              <div key={stat.label} className="flex flex-col-reverse justify-end gap-1 px-3 first:pl-0 last:pr-0 sm:px-5">
+                <dt className="text-[11px] leading-snug text-primary/60 sm:text-xs">
+                  {stat.label}
+                </dt>
+                <dd className="font-display text-2xl font-bold tracking-tight text-primary sm:text-[1.75rem]">
+                  {stat.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <HeroVisual />
       </div>
 
-      {/* Headline + Buttons */}
-      <motion.div
-        className="relative z-10 mx-auto w-full max-w-3xl px-4 text-center sm:px-6"
-        style={{ y: contentY, opacity: contentOpacity }}
-      >
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mb-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-primary/50"
-        >
-          Agencia Creativa
-        </motion.p>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.95, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-5 text-[2rem] font-bold leading-[1.08] tracking-tight text-primary sm:text-4xl md:text-5xl"
-        >
-          Creamos experiencias que{' '}
-          <span className="gradient-text-accent">trascienden</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.1 }}
-          className="mx-auto mb-8 max-w-xl text-[0.95rem] leading-relaxed text-primary/65 sm:text-base"
-        >
-          Estrategia digital, producción BTL y activaciones de clase mundial para marcas que buscan impacto real.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.25 }}
-          className="flex flex-col items-center justify-center gap-3 sm:flex-row"
-        >
-          <a
-            href="#contacto"
-            className="group relative overflow-hidden rounded-full bg-accent px-10 py-4 text-base font-semibold text-white shadow-[0_14px_34px_rgba(255,67,66,0.35)] transition-all duration-300 hover:shadow-[0_18px_40px_rgba(255,67,66,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
-          >
-            <span className="relative z-10">Iniciar Proyecto</span>
-            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-600 group-hover:translate-x-full" />
-          </a>
-          <a
-            href="#trabajo"
-            className="rounded-full border border-primary/15 bg-white/50 px-10 py-4 text-base font-semibold text-primary transition-all duration-300 hover:border-primary/25 hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
-          >
-            Ver Portafolio
-          </a>
-        </motion.div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.6 }}
-        className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex h-9 w-5 items-start justify-center rounded-full border border-primary/12 bg-white/30 p-1"
-        >
-          <div className="h-1.5 w-1 rounded-full bg-primary/25" />
-        </motion.div>
-      </motion.div>
+      <ScrollHint />
     </section>
+  );
+}
+
+function HeroBackdrop() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+      <div className="hero-grid absolute inset-0" />
+      <div className="absolute -right-32 top-16 h-[28rem] w-[28rem] rounded-full bg-accent/15 blur-3xl sm:-right-16" />
+      <div className="absolute -left-40 bottom-0 h-[24rem] w-[24rem] rounded-full bg-highlight/12 blur-3xl" />
+    </div>
+  );
+}
+
+function HeroVisual() {
+  return (
+    <div
+      className="hero-reveal relative mx-auto w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[440px]"
+      style={delay(200)}
+    >
+      {/* Decorative concentric rings behind the card */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-[-12%] rounded-full border border-primary/[0.06]"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-[-26%] hidden rounded-full border border-dashed border-primary/[0.06] sm:block"
+      />
+
+      <div className="relative aspect-square overflow-hidden rounded-[2.25rem] border border-white bg-white shadow-[0_30px_70px_rgba(13,8,105,0.14)]">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,67,66,0.08),transparent_55%)]"
+        />
+        <Image
+          src="/brand/buho2.png"
+          alt="Búho de Boost Digital sobre una flecha de crecimiento"
+          width={612}
+          height={571}
+          priority
+          sizes="(min-width: 1024px) 440px, (min-width: 640px) 400px, 300px"
+          className="hero-float relative h-full w-full object-contain p-[12%]"
+        />
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="absolute -right-3 top-6 flex items-center gap-2 rounded-2xl border border-primary/10 bg-white/90 px-3.5 py-2.5 shadow-[0_14px_30px_rgba(13,8,105,0.12)] backdrop-blur sm:-right-8"
+      >
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent/10 text-accent">
+          <ArrowIcon />
+        </span>
+        <span className="text-xs font-semibold text-primary">Marcas que crecen</span>
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="absolute -bottom-5 -left-3 rounded-2xl bg-primary px-4 py-3 text-white shadow-[0_18px_36px_rgba(13,8,105,0.28)] sm:-left-8"
+      >
+        <p className="font-display text-lg font-bold leading-none">{stats[2].value}</p>
+        <p className="mt-1 text-[11px] text-white/75">{stats[2].label}</p>
+      </div>
+    </div>
+  );
+}
+
+function ScrollHint() {
+  return (
+    <div
+      aria-hidden="true"
+      className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 lg:block"
+    >
+      <div className="flex h-9 w-5.5 items-start justify-center rounded-full border border-primary/15 bg-white/50 p-1.5">
+        <span className="hero-scroll-dot h-1.5 w-1 rounded-full bg-primary/40" />
+      </div>
+    </div>
+  );
+}
+
+function ArrowIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 16 16"
+      fill="none"
+      className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transition-none"
+    >
+      <path
+        d="M3 8h10m0 0L8.5 3.5M13 8l-4.5 4.5"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }

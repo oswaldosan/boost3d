@@ -1,10 +1,11 @@
 import Header from '@/components/ui/Header';
 import Hero from '@/components/ui/Hero';
 import Services from '@/components/ui/Services';
-import CaseStudies from '@/components/ui/CaseStudies';
-import WhyChooseUs from '@/components/ui/WhyChooseUs';
+import Stats from '@/components/ui/Stats';
+import About from '@/components/ui/About';
+import DigitalExpertise from '@/components/ui/DigitalExpertise';
+import Clients from '@/components/ui/Clients';
 import Process from '@/components/ui/Process';
-import Testimonials from '@/components/ui/Testimonials';
 import CTA from '@/components/ui/CTA';
 import Footer from '@/components/ui/Footer';
 import ScrollArrow from '@/components/ui/ScrollArrow';
@@ -19,13 +20,15 @@ export default function Home() {
         <div className="section-divider" />
         <Services />
         <div className="section-divider" />
-        <CaseStudies />
+        <Stats />
         <div className="section-divider" />
-        <WhyChooseUs />
+        <About />
+        <div className="section-divider" />
+        <DigitalExpertise />
+        <div className="section-divider" />
+        <Clients />
         <div className="section-divider" />
         <Process />
-        <div className="section-divider" />
-        <Testimonials />
         <div className="section-divider" />
         <CTA />
       </main>
